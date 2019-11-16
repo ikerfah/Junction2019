@@ -35,7 +35,7 @@
                 android:background="@color/healthyColor"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
-                android:text="Healthy"
+                android:text="@{meal.foodType,default=HEALTHY}"
                 android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_bold"
-                android:text="Pan-Fried Tilapia " />
+                android:text="@{meal.name,default=Pan_Fried_Tilapia}" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -62,8 +62,9 @@
                 android:fontFamily="@font/open_sans"
                 android:layout_marginTop="2dp"
                 android:textColor="#919191"
+
                 android:textSize="10sp"
-                android:text="8/8 ingredients" />
+                android:text="@{meal.ingredients,default=ingredients}" />
 
             <View
                 android:layout_width="match_parent"
@@ -84,7 +85,7 @@
                     android:textSize="10sp"
                     android:textColor="#919191"
                     android:fontFamily="@font/open_sans"
-                    android:text="24 min "
+                    android:text="@{meal.duration,default=min}"
                     />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -94,7 +95,7 @@
                     android:textSize="10sp"
                     android:textColor="#01b091"
                     android:gravity="start"
-                    android:text="Ready To cock"
+                    android:text="@{meal.state,default=ready}"
                     />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
