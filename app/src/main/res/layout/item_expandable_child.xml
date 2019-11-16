@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="child"
+            type="com.ikerfah.junction2019.kitchen.MyChickenChild" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="1dp"
+        android:background="#fcfffd"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp">
+
+        <!--    android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"-->
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/meal1" />
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#444444"
+            android:layout_weight="1"
+            android:fontFamily="@font/open_sans_semiboldd"
+            android:text="@{child.name,default=Banana}" />
+
+        <TextView
+            android:id="@+id/text_weight"
+            android:textColor="#444444"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/open_sans_semiboldd"
+            android:layout_height="wrap_content"
+            android:text="@{child.weight,default=xxkg}"/>
+    </LinearLayout>
+</layout>

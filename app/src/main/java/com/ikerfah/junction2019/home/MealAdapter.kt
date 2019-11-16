@@ -1,4 +1,4 @@
-package com.ikerfah.junction2019
+package com.ikerfah.junction2019.home
 
 import android.os.Build
 import android.text.Html
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ikerfah.junction2019.Meal
 import com.ikerfah.junction2019.databinding.ItemHeaderBinding
 import com.ikerfah.junction2019.databinding.ItemMealBinding
 
@@ -22,10 +23,18 @@ class MealAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         val layoutInflater = LayoutInflater.from(parent.context)
         if (viewType == TYPE_HEADER) {
-            return ViewHolderHeader(ItemHeaderBinding.inflate(layoutInflater))
+            return ViewHolderHeader(
+                ItemHeaderBinding.inflate(
+                    layoutInflater
+                )
+            )
         } else {
 
-            return ViewHolderProduct(ItemMealBinding.inflate(layoutInflater))
+            return ViewHolderProduct(
+                ItemMealBinding.inflate(
+                    layoutInflater
+                )
+            )
         }
     }
 
