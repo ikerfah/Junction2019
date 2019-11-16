@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Junction2019</string>
     <string name="main_title">Menu</string>
-    <string name="main_welcome_msg">Hi <font color='#01b091'>KERFAH</font>\nHare are some ideas for\n your next meal</string>
+    <string name="main_welcome_msg">Hi <font fgcolor='#01b091'>%s</font>\nHare are some ideas for\nyour next meal</string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
