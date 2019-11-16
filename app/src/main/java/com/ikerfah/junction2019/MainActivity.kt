@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ikerfah.junction2019.databinding.ActivityMainBinding
 import com.ikerfah.junction2019.home.HomeFragment
 import com.ikerfah.junction2019.kitchen.MyKitchenFragment
+import com.ikerfah.junction2019.shopping.ShoppingFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,17 +22,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var active: Fragment
     private lateinit var homeFragment: Fragment
     private lateinit var myKitchenFragment: Fragment
+    private lateinit var shoppingFragment: Fragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         homeFragment = HomeFragment()
         myKitchenFragment = MyKitchenFragment()
+        shoppingFragment = ShoppingFragment()
         active = homeFragment
         fm = supportFragmentManager
 
-//        fm.beginTransaction().add(R.id.main_fragment_container, fragment3, "3").hide(fragment3).commit()
-        fm.beginTransaction().add(R.id.main_fragment_container, myKitchenFragment, "2").hide(myKitchenFragment).commit()
+        fm.beginTransaction().add(R.id.main_fragment_container, shoppingFragment, "3")
+            .hide(shoppingFragment).commit()
+        fm.beginTransaction().add(R.id.main_fragment_container, myKitchenFragment, "2")
+            .hide(myKitchenFragment).commit()
         fm.beginTransaction().add(R.id.main_fragment_container, homeFragment, "1").commit()
         mBinding.btnAdd.setOnClickListener {
             //            val integrator = IntentIntegrator(this)
@@ -71,10 +76,11 @@ class MainActivity : AppCompatActivity() {
         object : BottomNavigationView.OnNavigationItemSelectedListener {
 
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                when (item.getItemId()) {
-                    R.id.home -> {
+                when (item.itemId) {
+                    R.id.menu -> {
                         fm.beginTransaction().hide(active).show(homeFragment).commit()
                         active = homeFragment
+                        setToolbarTitle(Constants.HOME_ID)
                         return true
                     }
 
@@ -84,16 +90,25 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.shopping -> {
+                        fm.beginTransaction().hide(active).show(shoppingFragment).commit()
+                        active = shoppingFragment
+                        setToolbarTitle(Constants.SHOPPING_ID)
                         return true
                     }
 
                     R.id.kitchen -> {
                         fm.beginTransaction().hide(active).show(myKitchenFragment).commit()
                         active = myKitchenFragment
+                        setToolbarTitle(Constants.MY_CHICKEN_ID)
                         return true
                     }
                 }
                 return false
             }
         }
+
+    fun setToolbarTitle(id: Int) {
+        mBinding.toolbar.title = Constants.getTitle(id)
+    }
+
 }
