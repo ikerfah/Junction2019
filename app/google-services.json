@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "37296301717",
+    "firebase_url": "https://junction2019-9e57e.firebaseio.com",
+    "project_id": "junction2019-9e57e",
+    "storage_bucket": "junction2019-9e57e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37296301717:android:771475a2cc78b1e2fd5d9c",
+        "android_client_info": {
+          "package_name": "com.ikerfah.junction2019"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37296301717-hfu5061dtutp4m9nd8i48stfpjtonigh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPVuZrQH6auTFChGuQGEBTcNmNk_fWz8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37296301717-hfu5061dtutp4m9nd8i48stfpjtonigh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
