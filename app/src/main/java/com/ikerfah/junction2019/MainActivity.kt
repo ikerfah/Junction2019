@@ -59,27 +59,29 @@ class MainActivity : AppCompatActivity() {
 //            integrator.initiateScan()
 
 
-            startActivityForResult(Intent(this, ScanActivity::class.java), SCAN_CODE)
+            startActivity(Intent(this, ScanActivity::class.java))
+//            startActivity(Intent(this, SubmitDataActivity::class.java))
 //            IntentIntegrator(this).setOrientationLocked(false)
 //                .setCaptureActivity(ScanActivity::class.java).initiateScan()
 
         }
 
+
     }
 
-    // Get the results:
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        if (resultCode == SCAN_CODE) {
-            if (requestCode != Activity.RESULT_OK) {
-                Toast.makeText(this, "Scanned: ", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
+//    // Get the results:
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//
+//        if (resultCode == SCAN_CODE) {
+//            if (requestCode != Activity.RESULT_OK) {
+//                Toast.makeText(this, "Scanned: ", Toast.LENGTH_LONG).show()
+//            } else {
+//                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+//            }
+//        } else {
+//            super.onActivityResult(requestCode, resultCode, data)
+//        }
+//    }
 
 
 }

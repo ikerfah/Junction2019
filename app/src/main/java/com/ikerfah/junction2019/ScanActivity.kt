@@ -2,6 +2,7 @@ package com.ikerfah.junction2019
 
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
+import com.ikerfah.junction2019.databinding.ActivityScanBinding
 import java.util.concurrent.Executors
 
 class ScanActivity : AppCompatActivity() {
@@ -21,10 +24,11 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private lateinit var textureView: TextureView
+    private lateinit var mBinding:ActivityScanBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan);
+        mBinding = DataBindingUtil.setContentView(this,R.layout.activity_scan)
 
         textureView = findViewById(R.id.texture_view)
 
@@ -37,6 +41,10 @@ class ScanActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.CAMERA),
                 REQUEST_CAMERA_PERMISSION
             )
+        }
+
+        mBinding.btnBack.setOnClickListener {
+            finish()
         }
     }
 
@@ -59,8 +67,9 @@ class ScanActivity : AppCompatActivity() {
         val qrCodeAnalyzer = QrCodeAnalyzer {
             CameraX.unbindAll()
             Log.d("QrCodeAnalyzer", "QR Code detected: ${it.rawValue}.")
-            Toast.makeText(this, "Code Scanned ${it.rawValue}", Toast.LENGTH_LONG).show()
-            setResult(Activity.RESULT_OK)
+//            Toast.makeText(this, "Code Scanned ${it.rawValue}", Toast.LENGTH_LONG).show()
+//            setResult(Activity.RESULT_OK)
+            startActivity(Intent(this, SubmitDataActivity::class.java))
             finish()
         }
 
