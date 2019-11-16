@@ -56,7 +56,7 @@ class MyKitchenFragment : Fragment() {
         expandableListDetail = Faker.getData()
 
         expandableListTitle = expandableListDetail!!.keys.map {
-             MyChickenGroup(name = it, nbItems = Random(10).nextInt())
+            MyChickenGroup(name = it, nbItems = expandableListDetail!![it]!!.size)
         }
 
         expandableListAdapter =

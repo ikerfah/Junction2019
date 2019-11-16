@@ -2,6 +2,7 @@ package com.ikerfah.junction2019
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ikerfah.junction2019.databinding.ActivityMainBinding
 import com.ikerfah.junction2019.home.HomeFragment
 import com.ikerfah.junction2019.kitchen.MyKitchenFragment
+import com.ikerfah.junction2019.recieps.RecipeFragment
 import com.ikerfah.junction2019.shopping.ShoppingFragment
 
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fm: FragmentManager
     private lateinit var active: Fragment
     private lateinit var homeFragment: Fragment
+    private lateinit var recipeFragment: Fragment
     private lateinit var myKitchenFragment: Fragment
     private lateinit var shoppingFragment: Fragment
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,32 +33,27 @@ class MainActivity : AppCompatActivity() {
         homeFragment = HomeFragment()
         myKitchenFragment = MyKitchenFragment()
         shoppingFragment = ShoppingFragment()
+        recipeFragment = RecipeFragment()
         active = homeFragment
         fm = supportFragmentManager
 
+        fm.beginTransaction().add(R.id.main_fragment_container, recipeFragment, "4")
+            .hide(recipeFragment).commit()
         fm.beginTransaction().add(R.id.main_fragment_container, shoppingFragment, "3")
             .hide(shoppingFragment).commit()
         fm.beginTransaction().add(R.id.main_fragment_container, myKitchenFragment, "2")
             .hide(myKitchenFragment).commit()
         fm.beginTransaction().add(R.id.main_fragment_container, homeFragment, "1").commit()
         mBinding.btnAdd.setOnClickListener {
-            //            val integrator = IntentIntegrator(this)
-//            integrator.setOrientationLocked(false)
-//
-//            integrator.captureActivity = ScanActivity::class.java
-//            integrator.initiateScan()
-
 
             startActivity(Intent(this, ScanActivity::class.java))
 //            startActivity(Intent(this, SubmitDataActivity::class.java))
-//            IntentIntegrator(this).setOrientationLocked(false)
-//                .setCaptureActivity(ScanActivity::class.java).initiateScan()
 
         }
 
         mBinding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-
+        setToolbarTitle(Constants.HOME_ID)
     }
 
 //    // Get the results:
@@ -85,7 +83,9 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.recipies -> {
-
+                        fm.beginTransaction().hide(active).show(recipeFragment).commit()
+                        active = recipeFragment
+                        setToolbarTitle(Constants.RECIPE_ID)
                         return true
                     }
 
@@ -109,6 +109,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setToolbarTitle(id: Int) {
         mBinding.toolbar.title = Constants.getTitle(id)
+        mBinding.executePendingBindings()
     }
 
 }

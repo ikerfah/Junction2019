@@ -1,4 +1,4 @@
-package com.ikerfah.junction2019.home
+package com.ikerfah.junction2019.recieps
 
 
 import android.graphics.Rect
@@ -9,28 +9,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ikerfah.junction2019.Constants
-import com.ikerfah.junction2019.MainActivity
 import com.ikerfah.junction2019.Meal
 import com.ikerfah.junction2019.databinding.FragmentHomeBinding
+import com.ikerfah.junction2019.databinding.FragmentRecipeBinding
+import com.ikerfah.junction2019.home.MealAdapter
 
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment() {
+class RecipeFragment : Fragment() {
 
-    private lateinit var mBinding : FragmentHomeBinding
+    private lateinit var mBinding : FragmentRecipeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mBinding = FragmentHomeBinding.inflate(inflater,container,false)
+        mBinding = FragmentRecipeBinding.inflate(inflater,container,false)
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var adapter = MealAdapter(
+        var adapter = RecipeAdapter(
             arrayListOf(
                 Meal(
                     "meal 1",
@@ -107,8 +107,6 @@ class HomeFragment : Fragment() {
                 }
             }
         })
-
-        (activity as MainActivity).setToolbarTitle(Constants.HOME_ID)
     }
 
 
