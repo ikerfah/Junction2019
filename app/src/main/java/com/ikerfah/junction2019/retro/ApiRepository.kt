@@ -45,7 +45,7 @@ class ApiRepository {
 
             override fun onFailure(call: Call<ScanRecipeResponse>, t: Throwable) {
 
-                data.value = DataWrapper(Ressource.FAILED, null)
+                data.postValue(DataWrapper(Ressource.FAILED, null))
             }
 
             override fun onResponse(
@@ -75,7 +75,7 @@ class ApiRepository {
 
             override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
 
-                data.value = DataWrapper(Ressource.FAILED, null)
+                data.postValue(DataWrapper(Ressource.FAILED, null))
             }
 
             override fun onResponse(
@@ -104,7 +104,7 @@ class ApiRepository {
 
             override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
 
-                data.value = DataWrapper(Ressource.FAILED, null)
+                data.postValue(DataWrapper(Ressource.FAILED, null))
             }
 
             override fun onResponse(

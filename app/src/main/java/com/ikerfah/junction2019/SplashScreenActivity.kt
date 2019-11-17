@@ -24,7 +24,7 @@ class SplashScreenActivity : AppCompatActivity() {
         Handler().postDelayed({
             startActivity(Intent(this,MainActivity::class.java))
             finish()
-        },3500)
+        },3000)
     }
 
     /*override fun initSplash(configSplash: ConfigSplash) {
