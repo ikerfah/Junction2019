@@ -12,10 +12,8 @@ import kotlinx.android.synthetic.main.item_expandable_group.view.*
 import android.widget.LinearLayout
 import android.util.TypedValue
 import android.view.ViewGroup.MarginLayoutParams
-
-
-
-
+import androidx.appcompat.widget.AppCompatImageView
+import com.bumptech.glide.Glide
 
 
 class CustomExpandableListAdapter(
@@ -47,12 +45,17 @@ class CustomExpandableListAdapter(
 
         val weight = convertView!!
             .findViewById(R.id.text_weight) as TextView
+
+        val img = convertView!!
+            .findViewById(R.id.img) as AppCompatImageView
         title.text = expandedListText.name
         weight.text = expandedListText.weight
+        Glide.with(context).load("http://192.168.43.15:8001/${expandedListText.imgUrl}")
+            .into(img)
 
-        val params = parent.layoutParams as MarginLayoutParams
-        params.bottomMargin = 30
-        convertView.requestLayout()
+
+
+
         return convertView
     }
 
@@ -97,9 +100,13 @@ class CustomExpandableListAdapter(
         val items = convertView!!
             .findViewById(R.id.text_items) as TextView
         title.setTypeface(null, Typeface.BOLD)
-
+        val img = convertView!!
+            .findViewById(R.id.img) as AppCompatImageView
         title.text = listTitle.name
         items.text = listTitle.nbItems.toString()
+        Glide.with(context).load("http://192.168.43.15:8001/${listTitle.imgUrl}")
+            .error(R.drawable.meal1)
+            .into(img);
 
 
         if (isExpanded) {

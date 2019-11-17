@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ikerfah.junction2019.Faker
 import com.ikerfah.junction2019.MainViewModel
+import com.ikerfah.junction2019.Utils
 import com.ikerfah.junction2019.databinding.FragmentMyKitchenBinding
 import com.ikerfah.junction2019.kitchen.CustomExpandableListAdapter
 import com.ikerfah.junction2019.kitchen.MyChickenChild
@@ -60,18 +61,6 @@ class ShoppingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
-        val metrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
-        val width = metrics.widthPixels
-
-        mBinding.expandableListview.setIndicatorBounds(
-            width - GetPixelFromDips(50f),
-            width - GetPixelFromDips(10f)
-        )
-
-
-
-        mBinding.expandableListview.setIndicatorBounds(width - 50, width - 10)
         mBinding.expandableListview.setOnGroupExpandListener { groupPosition ->
             /*Toast.makeText(
                 mContext,
@@ -106,7 +95,7 @@ class ShoppingFragment : Fragment() {
         mainViewModel.getMissedProduct().observe(this, Observer {
 
             if (it.state == Ressource.SUCCES) {
-                expandableListDetail = getDataFromProductResponse(it.data!!)
+                expandableListDetail = Utils.getDataFromProductResponse(it.data!!)
 
                 val tmp = expandableListDetail!!.keys.map {
                     MyChickenGroup(name = it, nbItems = expandableListDetail!![it]!!.size)
@@ -128,17 +117,5 @@ class ShoppingFragment : Fragment() {
 
     }
 
-    fun getDataFromProductResponse(response: ProductResponse): HashMap<String, List<MyChickenChild>> {
-        var hashMapToReturn: HashMap<String, List<MyChickenChild>> = hashMapOf()
-        var fak = Faker.getData()
-        response.result?.forEach {
-            var products = arrayListOf<MyChickenChild>()
-            it.products?.forEach {
-                products.add(MyChickenChild(it.name, it.weight.toString()))
-            }
-            hashMapToReturn[it.id.toString()] = products
-        }
 
-        return hashMapToReturn
-    }
 }

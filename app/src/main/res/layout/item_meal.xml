@@ -30,12 +30,12 @@
                 app:srcCompat="@drawable/meal1" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_is_healthy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/healthyColor"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
-                android:text="@{meal.foodType,default=HEALTHY}"
+                android:text="@{meal.foodType,default=Healthy}"
                 android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -91,6 +91,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:id="@+id/text_meal_state"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
                     android:textColor="#01b091"

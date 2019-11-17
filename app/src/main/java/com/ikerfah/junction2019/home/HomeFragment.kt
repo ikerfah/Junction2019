@@ -36,56 +36,56 @@ class HomeFragment : Fragment() {
                     "meal 1",
                     "8/8 ing",
                     "24 min",
-                    "Ready to tyab",
+                    "Ready to cock",
                     "Healthy"
                 ),
                 Meal(
                     "meal 2",
                     "8/8 ing",
                     "24 min",
-                    "Not to tyab",
-                    "Not Healthy"
+                    "You need some ingredients",
+                    "Healthy"
                 ),
                 Meal(
                     "meal 3",
                     "8/8 ing",
                     "24 min",
-                    "Ready to tyab",
+                    "Ready to cock",
                     "Not  Healthy"
                 ),
                 Meal(
                     "meal 4",
                     "8/8 ing",
                     "10 min",
-                    "Not to tyab",
+                    "You need some ingredients",
                     "Not  Healthy"
                 ),
                 Meal(
                     "meal 5",
                     "8/8 ing",
                     "29 min",
-                    "Ready to tyab",
+                    "Ready to cock",
                     "Healthy"
                 ),
                 Meal(
                     "meal 6",
                     "8/8 ing",
                     "20 min",
-                    "Not to tyab",
+                    "Ingredients are missing",
                     "Healthy"
                 ),
                 Meal(
                     "meal 7",
                     "8/8 ing",
                     "5 min",
-                    "Ready to tyab",
+                    "You need some ingredients",
                     "Not Healthy"
                 ),
                 Meal(
                     "meal 8",
                     "8/8 ing",
                     "64 min",
-                    "Ready to tyab",
+                    "Ingredients are missing",
                     "Healthy"
                 )
             )

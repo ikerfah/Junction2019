@@ -23,4 +23,10 @@ class MainViewModel : ViewModel {
 
         return repo.getMissedProduct()
     }
+
+
+    fun getAllProducts():LiveData<DataWrapper<ProductResponse>> {
+
+        return repo.getAllProducts()
+    }
 }

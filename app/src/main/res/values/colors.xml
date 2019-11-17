@@ -6,4 +6,5 @@
 
     <color name="bottomNavigationBackground">#f5f5f5</color>
     <color name="healthyColor">#01b091</color>
+    <color name="notHealthyColor">#ff5a5e</color>
 </resources>

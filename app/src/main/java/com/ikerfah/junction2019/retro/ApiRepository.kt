@@ -92,4 +92,33 @@ class ApiRepository {
         return data
     }
 
+    fun getAllProducts(): LiveData<DataWrapper<ProductResponse>> {
+
+        var data = MutableLiveData<DataWrapper<ProductResponse>>(
+            DataWrapper<ProductResponse>(
+                Ressource.LOADING,
+                null
+            )
+        )
+        service?.missedProducts()?.enqueue(object : Callback<ProductResponse> {
+
+            override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+
+                data.value = DataWrapper(Ressource.FAILED, null)
+            }
+
+            override fun onResponse(
+                call: Call<ProductResponse>,
+                response: Response<ProductResponse>
+            ) {
+                if (response.isSuccessful) {
+                    data.postValue( DataWrapper(Ressource.SUCCES, response.body()))
+                }
+            }
+
+        })
+
+        return data
+    }
+
 }

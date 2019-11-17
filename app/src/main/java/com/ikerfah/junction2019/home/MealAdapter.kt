@@ -1,5 +1,6 @@
 package com.ikerfah.junction2019.home
 
+import android.graphics.Color
 import android.os.Build
 import android.text.Html
 import android.view.LayoutInflater
@@ -105,6 +106,22 @@ class MealAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         fun bind(meal: Meal) {
             mBinding.meal = meal
+
+            if (meal.foodType.equals("Healthy", true)) {
+                mBinding.textIsHealthy.setBackgroundColor(Color.parseColor("#01b091"))
+            } else {
+                mBinding.textIsHealthy.setBackgroundColor(Color.parseColor("#ff5a5e"))
+            }
+
+            if (meal.state.equals("Ready to cock", true)) {
+                mBinding.textMealState.setTextColor(Color.parseColor("#01b091"))
+            } else if (meal.state.equals("You need some ingredients", true)) {
+                mBinding.textMealState.setTextColor(Color.parseColor("#ffc82f"))
+            }else {
+                mBinding.textMealState.setTextColor(Color.parseColor("#ff5a5e"))
+            }
+
+
             mBinding.executePendingBindings()
         }
     }

@@ -23,6 +23,7 @@
         <!--    android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"-->
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img"
             android:layout_width="60dp"
             android:layout_height="60dp"
             app:srcCompat="@drawable/meal1" />
@@ -32,6 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="#444444"
+            android:paddingLeft="10dp"
             android:layout_weight="1"
             android:fontFamily="@font/open_sans_semiboldd"
             android:text="@{child.name,default=Banana}" />
