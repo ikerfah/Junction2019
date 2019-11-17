@@ -1,7 +1,6 @@
 package com.ikerfah.junction2019
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -15,6 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import com.ikerfah.junction2019.databinding.ActivityScanBinding
+import com.ikerfah.junction2019.scan.QrCodeAnalyzer
+import com.ikerfah.junction2019.scan.SubmitDataActivity
 import java.util.concurrent.Executors
 
 class ScanActivity : AppCompatActivity() {
@@ -69,7 +70,13 @@ class ScanActivity : AppCompatActivity() {
             Log.d("QrCodeAnalyzer", "QR Code detected: ${it.rawValue}.")
 //            Toast.makeText(this, "Code Scanned ${it.rawValue}", Toast.LENGTH_LONG).show()
 //            setResult(Activity.RESULT_OK)
-            startActivity(Intent(this, SubmitDataActivity::class.java))
+            startActivity(
+                Intent(
+                    this,
+                    SubmitDataActivity::class.java
+                )
+                    .putExtra("qrcode",it.rawValue)
+            )
             finish()
         }
 

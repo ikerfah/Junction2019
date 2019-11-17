@@ -1,21 +1,31 @@
-package com.ikerfah.junction2019
+package com.ikerfah.junction2019.scan
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.ikerfah.junction2019.R
 import com.ikerfah.junction2019.databinding.ActivitySubmitDataBinding
+import com.ikerfah.junction2019.retro.Ressource
 
 
 class SubmitDataActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivitySubmitDataBinding
+    private lateinit var mViewModel: ScanViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_submit_data)
+        mBinding = DataBindingUtil.setContentView(
+            this,
+            R.layout.activity_submit_data
+        )
 
+        mViewModel = ViewModelProviders.of(this).get(ScanViewModel::class.java)
         val mProgress = findViewById<ProgressBar>(R.id.circularProgressbar) as ProgressBar
 
         mProgress.progress = 0   // Main Progress
@@ -25,8 +35,9 @@ class SubmitDataActivity : AppCompatActivity() {
         var pStatus = 0
         showLoading()
 
+
         Thread(Runnable {
-            while (pStatus < 100) {
+            while (pStatus < 50) {
                 pStatus += 1
 
                 runOnUiThread {
@@ -43,10 +54,26 @@ class SubmitDataActivity : AppCompatActivity() {
                 }
 
             }
-            hideLoading()
 
 
         }).start()
+
+        Handler().postDelayed({
+            mViewModel.addRecipe(intent.getStringExtra("qrcode")!!).observe(this, Observer {
+
+                if (it.state == Ressource.SUCCES) {
+                    runOnUiThread {
+                        pStatus = 100
+                        mProgress.progress = pStatus
+                        mBinding.textProgress.text = "$pStatus%"
+                    }
+                    hideLoading()
+                }
+
+            })
+        },3000)
+
+
 
         mBinding.btnReturn.setOnClickListener {
             finish()

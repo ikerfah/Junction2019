@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ikerfah.junction2019.databinding.ActivityMainBinding
 import com.ikerfah.junction2019.home.HomeFragment
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recipeFragment: Fragment
     private lateinit var myKitchenFragment: Fragment
     private lateinit var shoppingFragment: Fragment
+
+    private lateinit var mainViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -54,6 +58,17 @@ class MainActivity : AppCompatActivity() {
         mBinding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         setToolbarTitle(Constants.HOME_ID)
+
+
+
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
+        mainViewModel.getMissedProduct().observe(this, Observer {
+
+        })
+
+
+
     }
 
 //    // Get the results:

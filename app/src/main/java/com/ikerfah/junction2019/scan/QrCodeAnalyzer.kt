@@ -1,4 +1,4 @@
-package com.ikerfah.junction2019
+package com.ikerfah.junction2019.scan
 
 import android.util.Log
 import androidx.camera.core.ImageAnalysis

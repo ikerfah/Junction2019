@@ -3,20 +3,23 @@ package com.ikerfah.junction2019.shopping
 
 import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.ikerfah.junction2019.Faker
+import com.ikerfah.junction2019.MainViewModel
 import com.ikerfah.junction2019.databinding.FragmentMyKitchenBinding
-import android.widget.Toast
-import kotlin.random.Random
-import android.util.DisplayMetrics
 import com.ikerfah.junction2019.kitchen.CustomExpandableListAdapter
 import com.ikerfah.junction2019.kitchen.MyChickenChild
 import com.ikerfah.junction2019.kitchen.MyChickenGroup
+import com.ikerfah.junction2019.models.ProductResponse
+import com.ikerfah.junction2019.retro.Ressource
 
 
 /**
@@ -30,12 +33,14 @@ class ShoppingFragment : Fragment() {
     var expandableListAdapter: ExpandableListAdapter? = null
     var expandableListTitle: List<MyChickenGroup>? = null
     var expandableListDetail: HashMap<String, List<MyChickenChild>>? = null
+
+    private lateinit var mainViewModel: MainViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mBinding = FragmentMyKitchenBinding.inflate(inflater,container,false)
+        mBinding = FragmentMyKitchenBinding.inflate(inflater, container, false)
         return mBinding.root
     }
 
@@ -44,22 +49,16 @@ class ShoppingFragment : Fragment() {
         super.onAttach(context)
         mContext = context
     }
+
     fun GetPixelFromDips(pixels: Float): Int {
         // Get the screen's density scale
         val scale = resources.displayMetrics.density
         // Convert the dps to pixels, based on density scale
         return (pixels * scale + 0.5f).toInt()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        expandableListDetail = Faker.getData()
-
-        expandableListTitle = expandableListDetail!!.keys.map {
-            MyChickenGroup(name = it, nbItems = expandableListDetail!![it]!!.size)
-        }
-
-        expandableListAdapter =
-            CustomExpandableListAdapter(mContext!!, expandableListTitle!!, expandableListDetail!!)
 
         val metrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
@@ -70,7 +69,6 @@ class ShoppingFragment : Fragment() {
             width - GetPixelFromDips(10f)
         )
 
-        mBinding.expandableListview.setAdapter(expandableListAdapter)
 
 
         mBinding.expandableListview.setIndicatorBounds(width - 50, width - 10)
@@ -103,5 +101,44 @@ class ShoppingFragment : Fragment() {
 
 
 
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
+        mainViewModel.getMissedProduct().observe(this, Observer {
+
+            if (it.state == Ressource.SUCCES) {
+                expandableListDetail = getDataFromProductResponse(it.data!!)
+
+                val tmp = expandableListDetail!!.keys.map {
+                    MyChickenGroup(name = it, nbItems = expandableListDetail!![it]!!.size)
+                }
+                expandableListTitle = tmp
+
+
+                expandableListAdapter =CustomExpandableListAdapter(
+                    mContext!!,
+                    expandableListTitle!!,
+                    expandableListDetail!!
+                )
+
+                mBinding.expandableListview.setAdapter(expandableListAdapter)
+
+
+            }
+        })
+
+    }
+
+    fun getDataFromProductResponse(response: ProductResponse): HashMap<String, List<MyChickenChild>> {
+        var hashMapToReturn: HashMap<String, List<MyChickenChild>> = hashMapOf()
+        var fak = Faker.getData()
+        response.result?.forEach {
+            var products = arrayListOf<MyChickenChild>()
+            it.products?.forEach {
+                products.add(MyChickenChild(it.name, it.weight.toString()))
+            }
+            hashMapToReturn[it.id.toString()] = products
+        }
+
+        return hashMapToReturn
     }
 }
